@@ -49,6 +49,73 @@ class idsCamera:
             print(
                 f'Error occurred in loadCameraParameters!\n{exception}', 'error')
 
+    def setROI(self, xNew, yNew, widthNew, heightNew):
+        try:
+            '''
+            Sets the region of interest (ROI) for the camera.
+
+            Parameters
+            ----------
+            xNew : int
+                The x-coordinate of the top-left corner of the ROI.
+            yNew : int
+                The y-coordinate of the top-left corner of the ROI.
+            widthNew : int
+                The width of the ROI.
+            heightNew : int
+                The height of the ROI.
+
+            Raises
+            ------
+            Exception
+                If an error occurs while setting the ROI.
+            '''
+            # Get the current ROI
+            x = self.nodemap.FindNode("OffsetX").Value()
+            y = self.nodemap.FindNode("OffsetY").Value()
+            w = self.nodemap.FindNode("Width").Value()
+            h = self.nodemap.FindNode("Height").Value()
+
+            # Get the minimum ROI
+            x_min = self.nodemap.FindNode("OffsetX").Minimum()
+            y_min = self.nodemap.FindNode("OffsetY").Minimum()
+            w_min = self.nodemap.FindNode("Width").Minimum()
+            h_min = self.nodemap.FindNode("Height").Minimum()
+
+            # Set the minimum ROI. This removes any size restrictions due to previous ROI settings
+            self.nodemap.FindNode("OffsetX").SetValue(x_min)
+            self.nodemap.FindNode("OffsetY").SetValue(y_min)
+            self.nodemap.FindNode("Width").SetValue(w_min)
+            self.nodemap.FindNode("Height").SetValue(h_min)
+
+            # Get the maximum ROI values
+            x_max = self.nodemap.FindNode("OffsetX").Maximum()
+            y_max = self.nodemap.FindNode("OffsetY").Maximum()
+            w_max = self.nodemap.FindNode("Width").Maximum()
+            h_max = self.nodemap.FindNode("Height").Maximum()
+
+            # Get the increment
+            x_inc = self.nodemap.FindNode("OffsetX").Increment()
+            y_inc = self.nodemap.FindNode("OffsetY").Increment()
+            w_inc = self.nodemap.FindNode("Width").Increment()
+            h_inc = self.nodemap.FindNode("Height").Increment()
+
+            x = xNew
+            y = yNew
+            width = widthNew
+            height = heightNew
+
+            # Set the valid ROI
+            self.nodemap.FindNode("OffsetX").SetValue(x)
+            self.nodemap.FindNode("OffsetY").SetValue(y)
+            self.nodemap.FindNode(
+                "Width").SetValue(width)
+            self.nodemap.FindNode(
+                "Height").SetValue(height)
+        except Exception as exception:
+            print(
+                f'Error occurred in setROI!\n{exception}', 'error')
+
     def syncAsMaster(self):
         '''
         Synchronizes the camera as a master.
