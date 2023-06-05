@@ -10,15 +10,15 @@ class idsCamera:
 
         Parameters
         ----------
-        port : int
+        port: int
             Port number of the camera that is connected.
         '''
         # initialize the camera manager
         ids_peak.Library.Initialize()
-        device_manager = ids_peak.DeviceManager.Instance()
-        device_manager.Update()
+        deviceManager = ids_peak.DeviceManager.Instance()
+        deviceManager.Update()
 
-        self.cap = device_manager.Devices()[port].OpenDevice(
+        self.cap = deviceManager.Devices()[port].OpenDevice(
             ids_peak.DeviceAccessType_Exclusive)
 
         self.nodemap = self.cap.RemoteDevice().NodeMaps()[0]
@@ -35,7 +35,7 @@ class idsCamera:
 
         Parameters
         ----------
-        file : str
+        file: str
             Path to the yaml file containing camera parameters.
 
         Raises
@@ -52,17 +52,17 @@ class idsCamera:
     def setROI(self, xNew, yNew, widthNew, heightNew):
         try:
             '''
-            Sets the region of interest (ROI) for the camera.
+            Sets a Region of Interest (ROI) for the camera.
 
             Parameters
             ----------
-            xNew : int
+            xNew: int
                 The x-coordinate of the top-left corner of the ROI.
-            yNew : int
+            yNew: int
                 The y-coordinate of the top-left corner of the ROI.
-            widthNew : int
+            widthNew: int
                 The width of the ROI.
-            heightNew : int
+            heightNew: int
                 The height of the ROI.
 
             Raises
@@ -87,18 +87,6 @@ class idsCamera:
             self.nodemap.FindNode("OffsetY").SetValue(y_min)
             self.nodemap.FindNode("Width").SetValue(w_min)
             self.nodemap.FindNode("Height").SetValue(h_min)
-
-            # Get the maximum ROI values
-            x_max = self.nodemap.FindNode("OffsetX").Maximum()
-            y_max = self.nodemap.FindNode("OffsetY").Maximum()
-            w_max = self.nodemap.FindNode("Width").Maximum()
-            h_max = self.nodemap.FindNode("Height").Maximum()
-
-            # Get the increment
-            x_inc = self.nodemap.FindNode("OffsetX").Increment()
-            y_inc = self.nodemap.FindNode("OffsetY").Increment()
-            w_inc = self.nodemap.FindNode("Width").Increment()
-            h_inc = self.nodemap.FindNode("Height").Increment()
 
             x = xNew
             y = yNew
@@ -201,11 +189,11 @@ class idsCamera:
 
     def setExposureTime(self, exposureTime):
         '''
-        Sets the exposure time for the camera.
+        Sets the given exposure time for the camera.
 
         Parameters
         ----------
-        exposureTime : float
+        exposureTime: float
             The exposure time to set in milliseconds.
 
         Raises
@@ -258,4 +246,7 @@ class idsCamera:
                 f'Error occurred in getFrame!\n{exception}', 'error')
 
     def closeLibrary(self):
+        '''
+        Closes the IDS peak library and releases associated resources.
+        '''
         ids_peak.Library.Close()

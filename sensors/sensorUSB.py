@@ -3,7 +3,7 @@ import cv2
 
 def createCameraObject(port):
     '''
-    Creates an openCV VideoCapture object.
+    Creates an openCV `VideoCapture` object given a port number.
 
     Parameters
     ----------
@@ -12,7 +12,7 @@ def createCameraObject(port):
 
     Returns
     -------
-    cameraObject: cv2.VideoCapture
+    ret: cv2.VideoCapture
         VideoCapture object
     '''
     return cv2.VideoCapture(port)
@@ -20,7 +20,7 @@ def createCameraObject(port):
 
 def grabImage(videoCap):
     '''
-    returns the VideoCapture frame and return value.
+    Grabs the `VideoCapture` object and returns the frame.
 
     Parameters
     ----------
@@ -29,9 +29,7 @@ def grabImage(videoCap):
 
     Returns
     -------
-    ret: bool
+    ret: videoCap.read()
         boolean value of the returned frame.
-    frame: numpy.ndarray
-        Image
     '''
     return videoCap.read()

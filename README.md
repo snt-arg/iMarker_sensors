@@ -1,75 +1,58 @@
-# csr_sensors
-A repository to keep different sensors of CSR detector setup
+# CSR Detector - Sensors
 
-# IDS Camera Class Documentation
+This repository contains the interfaces for the hardware that uses **CSR Marker Detector**. The current version of the code supports cameras introduced below:
 
-The `idsCamera` class provides a convenient interface for interacting with IDS cameras using the IDS peak library in Python. This documentation aims to provide an overview of the class and its methods to help users understand how to utilize it in their projects.
+| Camera | Interface | Links and Description |
+| ------------ | ------------ | ------------ |
+| ELP-USB8MP02G-L75 | USB 2.0 | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+| iDS U3-3271LE-C-HQ Rev.1.2 | USB 3.0 and uEye+ | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.htmll) |
 
-## Class Initialization
 
-### `__init__(self, port)`
+## 🎥 Sensor Descriptions
 
-**Description:** Initializes the IDS camera object.
+Generally, the sensors are connected to a beamsplitter to provide exact outputs at the same time (as shown below).
+![ELP Cameras](docs/cameraSetups.png "ELP Cameras")
 
-**Parameters:**
-- `port` (int): Port number of the camera that is connected.
+### I. ELP Cameras
 
-## Camera Configuration
+For ELP cameras, the only required interfaces are USB 2.0 interfaces. Accordingly, the usage of the sensor is "plug & play." First, install the required library (OpenCV) using the command `pip install opencv-python`. The functions defined in `sensorUSB.py` file contain:
 
-### `loadCameraParameters(self, file)`
+- `createCameraObject`: creates an openCV `VideoCapture` object given a port number.
+- `grabImage`: grabs the `VideoCapture` object and returns the frame.
 
-**Description:** Loads camera parameters from a YAML file.
+### II. iDS Cameras
 
-**Parameters:**
-- `file` (str): Path to the YAML file containing camera parameters.
+For iDS cameras, it is necessary to install **iDS Peak** library and its Python binding according to [this link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.3_EN.html). Then, add the below Python bindings to make it work. You can also access the binding `whl` files from [this directory](/docs/iDS/):
 
-### `setROI(self, xNew, yNew, widthNew, heightNew)`
+- `Windows 64bit`:
+    - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win_amd64.whl`
+    - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win_amd64.whl`
 
-**Description:** Sets the region of interest (ROI) for the camera.
+- `Windows 32Bit`:
+    - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win32.whl`
+    - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win32.whl`
 
-**Parameters:**
-- `xNew` (int): The x-coordinate of the top-left corner of the ROI.
-- `yNew` (int): The y-coordinate of the top-left corner of the ROI.
-- `widthNew` (int): The width of the ROI.
-- `heightNew` (int): The height of the ROI.
+- `Linux`:
+    - Go to */usr/local/share/ids/bindings/python/wheel/* 
+    - Run `pip install ids_peak-1.4.3.0-cp38-cp38-linux_x86_64.whl`
+    - Run `pip install ids_peak_ipl-1.5.0.0-cp38-cp38-linux_x86_64.whl`
 
-### `syncAsMaster(self)`
+The `idsCamera` class provides a convenient interface for interacting with IDS cameras using the `IDS peak library` in Python. Here, we aim to provide an overview of the class and its methods to help users understand how to utilize it in their projects. The functions defined in `sensorIDS.py` file contain:
 
-**Description:** Synchronizes the camera as a master for triggering.
+- `__init__`: initializes the class for interacting with IDS peak library using the port number of the connected camera.
+- `loadCameraParameters`: loads camera parameters from a yaml file containing camera parameters, requires the path to the file.
+- `setROI`: sets a region of interest (ROI) for the camera.
+- `syncAsMaster`: synchronizes the camera as a master.
+- `syncAsSlave`: synchronizes the camera as a slave for synchronization with a master camera.
+- `startAquisition`: starts the data acquisition from the camera.
+- `setExposureTime`: the exposure time to set in milliseconds.
+- `getFrame`: triggers the camera to capture frames and returns them as a `numpy` array.
+- `closeLibrary`: closes an open object library.
 
-### `syncAsSlave(self)`
 
-**Description:** Synchronizes the camera as a slave for synchronization with a master camera.
+## ⚙️ Sample Usage
 
-### `setExposureTime(self, exposureTime)`
-
-**Description:** Sets the exposure time for the camera.
-
-**Parameters:**
-- `exposureTime` (float): The exposure time to set in milliseconds.
-
-## Data Acquisition
-
-### `startAquisition(self)`
-
-**Description:** Starts the data acquisition from the camera.
-
-### `getFrame(self)`
-
-**Description:** Triggers the camera to capture a frame and returns the frame as a NumPy array.
-
-**Returns:**
-- `np.ndarray`: The captured frame as a NumPy array.
-
-## Library Cleanup
-
-### `closeLibrary(self)`
-
-**Description:** Closes the IDS peak library and releases associated resources.
-
-## Example Usage
-
-Below is an example of how to use the `idsCamera` class:
+Below you can find an example of how to use the `idsCamera` class:
 
 ```python
 from ids_peak import ids_peak
