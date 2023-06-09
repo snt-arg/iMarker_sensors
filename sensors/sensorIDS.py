@@ -1,6 +1,5 @@
 from ids_peak import ids_peak
 from ids_peak_ipl import ids_peak_ipl
-import numpy as np
 
 
 class idsCamera:
