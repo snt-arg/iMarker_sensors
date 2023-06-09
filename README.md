@@ -49,6 +49,10 @@ The `idsCamera` class provides a convenient interface for interacting with IDS c
 - `getFrame`: triggers the camera to capture frames and returns them as a `numpy` array.
 - `closeLibrary`: closes an open object library.
 
+### Installation
+
+Finally, install the package using `pip install -e .` to install the packages.
+
 
 ## ⚙️ Sample Usage
 
