@@ -244,6 +244,12 @@ class idsCamera:
             print(
                 f'Error occurred in getFrame!\n{exception}', 'error')
 
+    def getCalibrationConfig(self, fileName: str):
+        '''
+        Closes the IDS peak library and releases associated resources.
+        '''
+        self.loadCameraParameters(f"config/{fileName}.cset")
+
     def closeLibrary(self):
         '''
         Closes the IDS peak library and releases associated resources.
