@@ -2,8 +2,8 @@ from setuptools import find_packages, setup
 
 setup(name='csr_sensors',
       version='1.0',
-      description='CSR detector with GUI',
       author='Ali Tourani',
+      description='CSR detector sensors',
       url='https://github.com/snt-arg/csr_sensors',
       packages=find_packages(
           include=['sensors']),
