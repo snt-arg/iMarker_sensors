@@ -5,7 +5,8 @@ This repository contains the interfaces for the hardware that uses **CSR Marker 
 | Camera | Interface | Links and Description |
 | ------------ | ------------ | ------------ |
 | ELP-USB8MP02G-L75 | USB 2.0 | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-| iDS U3-3271LE-C-HQ Rev.1.2 | USB 3.0 and uEye+ | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.htmll) |
+| iDS U3-3271LE-C-HQ Rev.1.2 | USB 3.0 and uEye+ | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html) |
+| RealSense D435(i) | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/) |
 
 
 ## 🎥 Sensor Descriptions
@@ -48,6 +49,17 @@ The `idsCamera` class provides a convenient interface for interacting with IDS c
 - `setExposureTime`: the exposure time to set in milliseconds.
 - `getFrame`: triggers the camera to capture frames and returns them as a `numpy` array.
 - `closeLibrary`: closes an open object library.
+
+### III. RealSense Cameras
+
+For RealSense cameras, the required interfaces are USB 3.0 interfaces. Install the required libraries (OpenCV and PyRealSense) using the command `pip install opencv-python pyrealsense2`. The functions defined in `sensorRealSense.py` file contain:
+
+- `createPipeline`: creates a pipeline for the RealSense camera.
+- `startPipeline`: starts a pipeline for the RealSense camera.
+- `grabFrames`: grabs frames from camera.
+- `getColorFrame`: gets color frames from the RealSense camera.
+- `stopPipeline`: stops the pipeline and releases memory.
+
 
 ### Installation
 

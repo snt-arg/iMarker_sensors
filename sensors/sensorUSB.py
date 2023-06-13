@@ -8,7 +8,7 @@ def createCameraObject(port):
     Parameters
     ----------
     port: int
-        port number of the camera that is connected
+        Port number of the camera that is connected
 
     Returns
     -------

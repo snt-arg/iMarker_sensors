@@ -10,5 +10,6 @@ setup(name='csr_sensors',
       install_requires=[
           'numpy',
           'opencv-python',
+          'pyrealsense2'
       ],
       )
