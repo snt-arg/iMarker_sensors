@@ -98,12 +98,17 @@ class rsCamera:
             If an error occurs while getting a color frame.
         '''
         try:
+            # Initializations
+            colorCamIntrinsics = None
             # Get the color frame
             colorFrame = frames.get_color_frame()
+            # Get intrinsics of the color camera
+            if colorFrame:
+                colorCamIntrinsics = colorFrame.profile.as_video_stream_profile().intrinsics
             # Convert the color frame to a numpy array
             colorImage = np.asanyarray(colorFrame.get_data())
             # Return
-            return colorImage
+            return colorImage, colorCamIntrinsics
         except Exception as exception:
             print(
                 f'Error occurred in getColorFrame!\n{exception}', 'error')
