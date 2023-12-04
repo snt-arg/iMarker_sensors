@@ -2,56 +2,59 @@
 
 ![Sensors](docs/cameraSetups.png "Sensors")
 
-This repository contains the interfaces for the hardware desgined for **CSR Marker Detection**. It is designed to be used by [CSR Detector with GUI](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based CSR Detector](https://github.com/snt-arg/csr_detector_ros) repositories. The current version of the code supports vision sensors introduced below:
+This repository contains the interfaces for the hardware desgined for **CSR Marker Detection**. It is designed to be used by [CSR Detector with GUI](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based CSR Detector](https://github.com/snt-arg/csr_detector_ros) repositories. The current version of the code supports the vision sensors listed below:
 
-| Camera | Interface | Links and Description |
-| ------------ | ------------ | ------------ |
-| ELP-USB8MP02G-L75 | USB 2.0 | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-| iDS U3-3271LE-C-HQ Rev.1.2 | USB 3.0 and uEye+ | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html) |
-| RealSense D435(i) | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/) |
-
+| Camera                                                                              | Interface              | Links and Description                                                                                                                                                         |
+| ----------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#i-elp-cameras)           | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ii-ids-cameras) | USB 3.0 and uEye+      | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                    |
+| [RealSense D435(i)](https://github.com/snt-arg/csr_sensors#iii-realsense-cameras)   | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                  |
 
 ## 🎥 Interface Installation
 
-Generally, the sensors are connected to a beamsplitter to provide exact outputs at the same time (as shown the cover image). However, there are some investigations to use a single camera for detecting CSR-based materials.
+Except for the RealSense camera, the sensors are connected to a beamsplitter to provide exact outputs at the same time (as shown the cover image). There are some investigations to use a single camera for detecting CSR-based materials, such as using a single iDS camera or RealSense with a changing polarizer.
 
-### I. ELP Cameras
+### I. Interface Installation
 
-For ELP cameras, the only required interfaces are USB 2.0 interfaces. Accordingly, the usage of the sensor is "plug & play." Thus, you can install the required library (OpenCV) using the command `pip install opencv-python`.
+As different sensors come with different hardware/software interfaces, pick the proper interface according to the below list:
 
-### II. iDS Cameras
+#### ELP Cameras
 
-For iDS cameras, it is necessary to install **iDS Peak** library and its Python binding according to [this link](https://en.ids-imaging.com/download-details/AB03448.html). Accordingly, you need to follow the steps described below:
+For ELP cameras, the only required interfaces are USB 2.0. Accordingly, the usage of the sensor is "plug & play." Thus, you can install the required library (OpenCV) using the command `pip install opencv-python`.
 
-1. Go to the [downloads](https://en.ids-imaging.com/downloads.html) section of iDS website and search for the camera name (in this case, `U3-3271LE-C-HQ Rev.1.2`). Choose the proper OS and download the file according to it (without uEye Transport Layer), such as *IDS peak 2.4 for Linux 64-bit - Debian package*.
+#### iDS Cameras
+
+For iDS cameras, it is necessary to install **iDS Peak** library and its Python binding according to [this link](https://en.ids-imaging.com/download-details/AB03448.html). Thus, you need to follow the steps described below:
+
+1. Go to the [downloads](https://en.ids-imaging.com/downloads.html) section of iDS website and search for the camera name (in this case, `U3-3271LE-C-HQ Rev.1.2`). Choose the proper OS and download the file according to it (without uEye Transport Layer), such as _IDS peak 2.4 for Linux 64-bit - Debian package_.
 2. Follow the instructions provided in [this (Ubuntu)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.4_EN.html) or [this (Windows)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html) links to install the files.
-    - [Ubuntu] you first need to install libraries using `pip install libqt5core5a libqt5gui5 libqt5widgets5 libqt5quick5 qml-module-qtquick-window2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-layouts libusb-1.0-0 libqt5multimedia5`. Then, you can go to the path you downloaded the **ids-peak** file and run `sudo apt install ./ids-peak_[version]_[arch].deb`.
+   - [Ubuntu] you first need to install libraries using `pip install libqt5core5a libqt5gui5 libqt5widgets5 libqt5quick5 qml-module-qtquick-window2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-layouts libusb-1.0-0 libqt5multimedia5`. Then, you can go to the path you downloaded the **ids-peak** file and run `sudo apt install ./ids-peak_[version]_[arch].deb`.
 3. Finally, you should add the below Python bindings to make it work. You can also access the binding `whl` files from [this directory](/docs/iDS/):
 
 - `Windows 64bit` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html)):
-    - Go to *C:\Program Files\IDS\ids_peak\generic_sdk\api\binding\python\wheel\x86_[32|64]*
-    - Choose "File > Open Windows PowerShell" in Windows Explorer.
-    - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win_amd64.whl`
-    - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win_amd64.whl`
+
+  - Go to _C:\Program Files\IDS\ids*peak\generic_sdk\api\binding\python\wheel\x86*[32|64]_
+  - Choose "File > Open Windows PowerShell" in Windows Explorer.
+  - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win_amd64.whl`
+  - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win_amd64.whl`
 
 - `Windows 32Bit` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html)):
-    - Go to *C:\Program Files\IDS\ids_peak\generic_sdk\api\binding\python\wheel\x86_[32|64]*
-    - Choose "File > Open Windows PowerShell" in Windows Explorer.
-    - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win32.whl`
-    - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win32.whl`
+
+  - Go to _C:\Program Files\IDS\ids*peak\generic_sdk\api\binding\python\wheel\x86*[32|64]_
+  - Choose "File > Open Windows PowerShell" in Windows Explorer.
+  - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win32.whl`
+  - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win32.whl`
 
 - `Linux` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.4_EN.html)):
-    - Go to */usr/local/share/ids/bindings/python/wheel/* 
-    - Run `pip install ids_peak-1.4.3.0-cp38-cp38-linux_x86_64.whl`
-    - Run `pip install ids_peak_ipl-1.5.0.0-cp38-cp38-linux_x86_64.whl`
+  - Go to _/usr/local/share/ids/bindings/python/wheel/_
+  - Run `pip install ids_peak-1.4.3.0-cp38-cp38-linux_x86_64.whl`
+  - Run `pip install ids_peak_ipl-1.5.0.0-cp38-cp38-linux_x86_64.whl`
 
+#### RealSense Cameras
 
-### III. RealSense Cameras
+For RealSense cameras, the required interfaces are USB 3.0. Install the required libraries (OpenCV and PyRealSense) using the command `pip install opencv-python pyrealsense2`.
 
-For RealSense cameras, the required interfaces are USB 3.0 interfaces. Install the required libraries (OpenCV and PyRealSense) using the command `pip install opencv-python pyrealsense2`.
-
-
-### Installation
+### II. Installation
 
 After installing proper interfaces, install the package of this project by running `pip install -e .` in the root directory.
 
@@ -90,7 +93,6 @@ The functions defined for this sensor are located in `sensorRealSense.py` file, 
 - `getColorFrame`: gets color frames from the RealSense camera.
 - `stopPipeline`: stops the pipeline and releases memory.
 
-
 ## ⚙️ Sample Usage
 
 Below you can find an example of how to use the `idsCamera` class:
@@ -120,7 +122,7 @@ def main():
     cap.startAquisition()
 
     # Set exposure time (optional)
-    cap.setExposureTime(20000) 
+    cap.setExposureTime(20000)
 
     while True:
         # Capture a frame
@@ -133,3 +135,4 @@ def main():
 
 # Run the program
 main()
+```
