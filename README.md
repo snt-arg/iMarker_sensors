@@ -4,11 +4,11 @@
 
 This repository contains the interfaces for the hardware desgined for **CSR Marker Detection**. It is designed to be used by [CSR Detector with GUI](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based CSR Detector](https://github.com/snt-arg/csr_detector_ros) repositories. The current version of the code supports the vision sensors listed below:
 
-| Camera                                                                              | Interface              | Links and Description                                                                                                                                                         |
-| ----------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#i-elp-cameras)           | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ii-ids-cameras) | USB 3.0 and uEye+      | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                    |
-| [RealSense D435(i)](https://github.com/snt-arg/csr_sensors#iii-realsense-cameras)   | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                  |
+| Camera                                                                           | Interface              | Links and Description                                                                                                                                                         |
+| -------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#elp-cameras)          | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ids-cameras) | USB 3.0 and uEye+      | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                    |
+| [RealSense D435(i)](https://github.com/snt-arg/csr_sensors#realsense-cameras)    | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                  |
 
 ## 🎥 Interface Installation
 
