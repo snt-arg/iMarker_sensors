@@ -45,9 +45,11 @@ class rsCamera:
                 rs.stream.color, self.frameWidth, self.frameHeight, rs.format.bgr8, self.fps)
             # Create a pipeline for the RealSense camera
             self.pipeline = rs.pipeline()
+            # Inform the user
+            print('- Pipeline created successfully!')
         except Exception as exception:
             print(
-                f'Error occurred in createPipeline!\n{exception}', 'error')
+                f'- Error occurred while creating a RealSense pipeline!\n- {exception}', 'error')
 
     def startPipeline(self):
         '''
@@ -61,9 +63,12 @@ class rsCamera:
         try:
             # Start the pipeline
             self.pipeline.start(self.config)
+            # Inform the user
+            print('- Pipeline started successfully!')
         except Exception as exception:
             print(
-                f'Error occurred in startPipeline!\n{exception}', 'error')
+                f'- Error occurred while starting the pipeline!\n- {exception}', 'error')
+            return False
 
     def grabFrames(self):
         '''
@@ -81,7 +86,7 @@ class rsCamera:
             return frames
         except Exception as exception:
             print(
-                f'Error occurred in grabFrames!\n{exception}', 'error')
+                f'- Error occurred while trying to grab frames!\n- {exception}', 'error')
 
     def getColorFrame(self, frames):
         '''
@@ -111,7 +116,7 @@ class rsCamera:
             return colorImage, colorCamIntrinsics
         except Exception as exception:
             print(
-                f'Error occurred in getColorFrame!\n{exception}', 'error')
+                f'- Error occurred while getting color frames!\n- {exception}', 'error')
 
     def stopPipeline(self):
         '''
@@ -127,4 +132,4 @@ class rsCamera:
             self.pipeline.stop()
         except Exception as exception:
             print(
-                f'Error occurred in stopPipeline!\n{exception}', 'error')
+                f'- Error occurred while stopping the pipeline!\n- {exception}', 'error')
