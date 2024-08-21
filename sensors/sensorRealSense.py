@@ -65,6 +65,7 @@ class rsCamera:
             self.pipeline.start(self.config)
             # Inform the user
             print('- Pipeline started successfully!')
+            return True
         except Exception as exception:
             print(
                 f'- Error occurred while starting the pipeline!\n- {exception}', 'error')

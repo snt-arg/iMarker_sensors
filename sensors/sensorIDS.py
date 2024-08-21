@@ -12,21 +12,25 @@ class idsCamera:
         port: int
             Port number of the camera that is connected.
         '''
-        # initialize the camera manager
-        ids_peak.Library.Initialize()
-        deviceManager = ids_peak.DeviceManager.Instance()
-        deviceManager.Update()
+        # Initialize the camera manager
+        try:
+            ids_peak.Library.Initialize()
+            deviceManager = ids_peak.DeviceManager.Instance()
+            deviceManager.Update()
 
-        self.cap = deviceManager.Devices()[port].OpenDevice(
-            ids_peak.DeviceAccessType_Exclusive)
+            self.cap = deviceManager.Devices()[port].OpenDevice(
+                ids_peak.DeviceAccessType_Exclusive)
 
-        self.nodemap = self.cap.RemoteDevice().NodeMaps()[0]
+            self.nodemap = self.cap.RemoteDevice().NodeMaps()[0]
 
-        self.nodemap.FindNode(
-            "AcquisitionMode").SetCurrentEntry("Continuous")
-        self.datastream = None
-        self.buffer = None
-        self.frame = None
+            self.nodemap.FindNode(
+                "AcquisitionMode").SetCurrentEntry("Continuous")
+            self.datastream = None
+            self.buffer = None
+            self.frame = None
+        except Exception as exception:
+            print(
+                f'- Error occurred in initializing the iDS camera with port# {port}!\n- {exception}', 'error')
 
     def loadCameraParameters(self, file):
         '''
@@ -46,7 +50,7 @@ class idsCamera:
             self.nodemap.LoadFromFile(file)
         except Exception as exception:
             print(
-                f'Error occurred in loadCameraParameters!\n{exception}', 'error')
+                f'- Error occurred in loading camera parameters!\n- {exception}', 'error')
 
     def setROI(self, xNew, yNew, widthNew, heightNew):
         try:
@@ -101,7 +105,7 @@ class idsCamera:
                 "Height").SetValue(height)
         except Exception as exception:
             print(
-                f'Error occurred in setROI!\n{exception}', 'error')
+                f'- Error occurred in setting ROI!\n- {exception}', 'error')
 
     def syncAsMaster(self):
         '''
@@ -134,7 +138,8 @@ class idsCamera:
             self.nodemap.FindNode(
                 "TriggerActivation").SetCurrentEntry("RisingEdge")
         except Exception as exception:
-            print(f'Error occurred in syncAsMaster!\n{exception}', 'error')
+            print(
+                f'- Error occurred in syncing the master camera!\n- {exception}', 'error')
 
     def syncAsSlave(self):
         '''
@@ -160,7 +165,7 @@ class idsCamera:
                 "TriggerActivation").SetCurrentEntry("RisingEdge")
         except Exception as exception:
             print(
-                f'Error occurred in syncAsSlave!\n{exception}', 'error')
+                f'- Error occurred in syncing the slave camera!\n- {exception}', 'error')
 
     def startAquisition(self):
         '''
@@ -184,7 +189,7 @@ class idsCamera:
             self.nodemap.FindNode("AcquisitionStart").WaitUntilDone()
         except Exception as exception:
             print(
-                f'Error occurred in startAquisition!\n{exception}', 'error')
+                f'- Error occurred in starting frame acquisition!\n- {exception}', 'error')
 
     def setExposureTime(self, exposureTime):
         '''
@@ -204,7 +209,7 @@ class idsCamera:
             self.nodemap.FindNode("ExposureTime").SetValue(exposureTime)
         except Exception as exception:
             print(
-                f'Error occurred in setExposureTime!\n{exception}', 'error')
+                f'- Error occurred in setting the exposure time!\n- {exception}', 'error')
 
     def getFrame(self):
         '''
@@ -242,7 +247,7 @@ class idsCamera:
 
         except Exception as exception:
             print(
-                f'Error occurred in getFrame!\n{exception}', 'error')
+                f'- Error occurred in getting frames!\n- {exception}', 'error')
 
     def getCalibrationConfig(self, rootPath: str, fileName: str):
         '''
