@@ -1,34 +1,39 @@
-# CSR Detector - Sensors
+# iMarker Detector - Sensors
 
 ![Sensors](docs/cameraSetups.png "Sensors")
 
-This repository contains the interfaces for the hardware desgined for **CSR Marker Detection**. It is designed to be used by [CSR Detector with GUI](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based CSR Detector](https://github.com/snt-arg/csr_detector_ros) repositories. The current version of the code supports the vision sensors listed below:
+This repository contains the interfaces for acquiring visual data from the hardware desgined for **iMarker Detection**. It is mainly used alongside [the detector software](https://github.com/snt-arg/csr_detector) and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks.
 
-| Camera                                                                           | Interface              | Links and Description                                                                                                                                                         |
-| -------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#elp-cameras)          | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ids-cameras) | USB 3.0 and uEye+      | Sony Pregius IMX265 3 MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                    |
-| [RealSense D435(i)](https://github.com/snt-arg/csr_sensors#realsense-cameras)    | USB 3.0 and RS library | RealSense Depth Camera D435 4 MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                  |
+The current version of the code supports the vision sensors listed below, but it can extend to cover others in the future:
 
-## 🎥 Interface Installation
+| Sensor                                                                       | Interface              | Description                                                                                                                                                                   |
+| ---------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#usb-cam)          | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ids-cam) | USB 3.0 and uEye+      | Sony Pregius IMX265 3MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                     |
+| [intel RealSense D435(i)](https://github.com/snt-arg/csr_sensors#rs-cam)     | USB 3.0 and RS library | RealSense Depth Camera D435 4MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                   |
 
-Except for the RealSense camera, the sensors are connected to a beamsplitter to provide exact outputs at the same time (as shown the cover image). There are some investigations to use a single camera for detecting CSR-based materials, such as using a single iDS camera or RealSense with a changing polarizer.
+## ⚒️ Sensors Setup
 
-### I. Interface Installation
+The hardware to detect iMarkers and CSRs are designed in two ways:
 
-As different sensors come with different hardware/software interfaces, pick the proper interface according to the below list:
+- **A. Dual-vision Setup:** a homogeneous perception system containing two (synchronized) cameras fixed perpendicular to each other in a pack, facing two different surfaces of an optical component, _i.e.,_ a beamsplitte. Setups designed for [ELP](https://github.com/snt-arg/csr_sensors#usb-cam) and [iDS](https://github.com/snt-arg/csr_sensors#ids-cam) cameras are the designed solutions.
+- **B. Single-vision Setup:** a single camera with a polarizer (fixed or changable) attached to its lens. [RealSense](https://github.com/snt-arg/csr_sensors#rs-cam) is used for this purpose.
 
-#### ELP Cameras
+## ⚙️ Installation
 
-For ELP cameras, the only required interfaces are USB 2.0. Accordingly, the usage of the sensor is "plug & play." Thus, you can install the required library (OpenCV) using the command `pip install opencv-python`.
+As different sensors come with different hardware/software interfaces, picking the proper interface for using the sensor is essential. The required libraries to be installed are listed below:
 
-#### iDS Cameras
+### ELP Cameras <a id="usb-cam"></a>
 
-For iDS cameras, it is necessary to install **iDS Peak** library and its Python binding according to [this link](https://en.ids-imaging.com/download-details/AB03448.html). Thus, you need to follow the steps described below:
+For ELP cameras, the only required interface is **USB 2.0**, making the usage of the sensor as "plug & play." Thus, you only need to install OpenCV using the command `pip install opencv-python` (tested with `opencv-python>4.10`).
 
-1. Go to the [downloads](https://en.ids-imaging.com/downloads.html) section of iDS website and search for the camera name (in this case, `U3-3271LE-C-HQ Rev.1.2`). Choose the proper OS and download the file according to it (without uEye Transport Layer), such as _IDS peak 2.4 for Linux 64-bit - Debian package_.
-2. Follow the instructions provided in [this (Ubuntu)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.4_EN.html) or [this (Windows)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html) links to install the files.
-   - [Ubuntu] you first need to install libraries using `sudo apt install libqt5core5a libqt5gui5 libqt5widgets5 libqt5quick5 qml-module-qtquick-window2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-layouts libusb-1.0-0 libqt5multimedia5`. Then, you can go to the path you downloaded the **ids-peak** file and run `sudo apt install ./ids-peak_[version]_[arch].deb`.
+### iDS Cameras <a id="ids-cam"></a>
+
+iDS cameras require **USB 3.0** and **iDS Peak** library and its Python binding introduced in [this link](https://en.ids-imaging.com/download-details/AB03448.html). Thus, you need to follow the steps described below:
+
+1. Go to the [downloads](https://en.ids-imaging.com/downloads.html) section of iDS website and search for the camera name (in this case, `U3-3271LE-C-HQ Rev.1.2`). Choose the proper OS (Ubuntu, Windows, or Mac) and download the file (without uEye Transport Layer), such as _IDS peak 2.4 for Linux 64-bit - Debian package_.
+2. Follow the instructions provided in [this (Ubuntu)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-linux-readme-2.4_EN.html) or [this (Windows)](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html) links to install the files. As a summary:
+   - [Ubuntu] you first need to install libraries using `sudo apt install libqt5core5a libqt5gui5 libqt5widgets5 libqt5quick5 qml-module-qtquick-window2 qml-module-qtquick2 qml-module-qtquick-dialogs qml-module-qtquick-controls qml-module-qtquick-layouts libusb-1.0-0 libqt5multimedia5`. Then, go to the path you downloaded the **ids-peak** file and run `sudo apt install ./ids-peak_[version]_[arch].deb`.
 3. Finally, you should add the below Python bindings to make it work. You can also access the binding `whl` files from [this directory](/docs/iDS/):
 
 - `Windows 64bit` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html)):
@@ -38,7 +43,7 @@ For iDS cameras, it is necessary to install **iDS Peak** library and its Python 
   - Run: `pip install src/IDS/Windows/ids_peak_ipl-1.6.0.0-cp310-cp310-win_amd64.whl`
   - Run: `pip install src/IDS/Windows/ids_peak-1.5.0.0-cp310-cp310-win_amd64.whl`
 
-- `Windows 32Bit` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html)):
+- `Windows 32bit` ([link](https://en.ids-imaging.com/files/downloads/ids-peak/readme/ids-peak-windows-readme-2.4_EN.html)):
 
   - Go to _C:\Program Files\IDS\ids*peak\generic_sdk\api\binding\python\wheel\x86*[32|64]_
   - Choose "File > Open Windows PowerShell" in Windows Explorer.
@@ -50,52 +55,37 @@ For iDS cameras, it is necessary to install **iDS Peak** library and its Python 
   - Run `pip install ids_peak-1.4.3.0-cp38-cp38-linux_x86_64.whl`
   - Run `pip install ids_peak_ipl-1.5.0.0-cp38-cp38-linux_x86_64.whl`
 
-#### RealSense Cameras
+### RealSense Cameras <a id="rs-cam"></a>
 
-For RealSense cameras, the required interfaces are USB 3.0. Install the required libraries (OpenCV and PyRealSense) using the command `pip install opencv-python pyrealsense2`.
+For RealSense cameras, the required interface is **USB 3.0**. Install the libraries using the command `pip install opencv-python pyrealsense2`.
 
-### II. Installation
+## 📑 Code Structure
 
-After installing proper interfaces, install the package of this project by running `pip install -e .` in the root directory.
+- **A. ELP USB Camera:** in `sensorUSB.py`, you can find functions `createCameraObject` and `grabImage` for creating camera objects and grabbing the frames, respectively.
+- **B. iDS Camera:** in `sensorIDS.py`, you can find below functions:
+  - `loadCameraParameters`: loading camera parameters from a yaml file
+  - `setROI`: setting a Region of Interest (ROI) for the camera
+  - `syncAsMaster`: synchronizing a camera as a master
+  - `syncAsSlave`: synchronizing a camera as a slave
+  - `startAquisition`: starting data acquisition from the camera
+  - `setExposureTime`: setting the given exposure time for the camera
+  - `getFrame`: triggering the camera to capture a frame and returns the frame as a numpy array
+  - `getCalibrationConfig`: getting the calibration configuration for the camera
+  - `closeLibrary`: closing the IDS peak library and releases associated resources
+- **C. RealSense Camera:** in `sensorIDS.py`, you can find below functions:
+  - `createPipeline`: creating a pipeline for the RealSense camera
+  - `startPipeline`: starting the pipeline for the RealSense camera
+  - `grabFrames`: grabbing frames from the RealSense camera
+  - `getColorFrame`: fetching color frames from the RealSense camera
+  - `stopPipeline`: stopping the pipeline and releasing memory
 
 ## 🚀 Running the Code
 
-To work with each of the mentioned sensors, you can find some defined functions:
+It should be noted that this repository contains the functions to use the introduced sensors in the `/sensors/` directory, described as below:
 
-### ELP Cameras
+As mentioned before, the current repository is a sub-module and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks. Accordingly, take a look at the mentioned repositories to see examples of using sensors.
 
-The functions defined for this sensor are located in `sensorUSB.py` file, which contains:
-
-- `createCameraObject`: creates an openCV `VideoCapture` object given a port number.
-- `grabImage`: grabs the `VideoCapture` object and returns the frame.
-
-### iDS Cameras
-
-The `idsCamera` class provides a convenient interface for interacting with IDS cameras using the `IDS peak library` in Python. Here, we aim to provide an overview of the class and its methods to help users understand how to utilize it in their projects. The functions defined in `sensorIDS.py` file contain:
-
-- `__init__`: initializes the class for interacting with IDS peak library using the port number of the connected camera.
-- `loadCameraParameters`: loads camera parameters from a yaml file containing camera parameters, requires the path to the file.
-- `setROI`: sets a region of interest (ROI) for the camera.
-- `syncAsMaster`: synchronizes the camera as a master.
-- `syncAsSlave`: synchronizes the camera as a slave for synchronization with a master camera.
-- `startAquisition`: starts the data acquisition from the camera.
-- `setExposureTime`: the exposure time to set in milliseconds.
-- `getFrame`: triggers the camera to capture frames and returns them as a `numpy` array.
-- `closeLibrary`: closes an open object library.
-
-### RealSense Cameras
-
-The functions defined for this sensor are located in `sensorRealSense.py` file, which contains:
-
-- `createPipeline`: creates a pipeline for the RealSense camera.
-- `startPipeline`: starts a pipeline for the RealSense camera.
-- `grabFrames`: grabs frames from camera.
-- `getColorFrame`: gets color frames from the RealSense camera.
-- `stopPipeline`: stops the pipeline and releases memory.
-
-## ⚙️ Sample Usage
-
-Below you can find an example of how to use the `idsCamera` class:
+As an example, you can find a sample of running iDS cameras to fetch frames:
 
 ```python
 from ids_peak import ids_peak

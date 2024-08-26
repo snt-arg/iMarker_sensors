@@ -251,7 +251,7 @@ class idsCamera:
 
     def getCalibrationConfig(self, rootPath: str, fileName: str):
         '''
-        Closes the IDS peak library and releases associated resources.
+        Gets the calibration configuration for the camera.
         '''
         self.loadCameraParameters(f"{rootPath}/{fileName}.cset")
 
