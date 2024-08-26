@@ -1,8 +1,8 @@
-# iMarker Detector - Sensors
+# iMarker Detector Sensor Interfaces
 
 ![Sensors](docs/cameraSetups.png "Sensors")
 
-This repository contains the interfaces for acquiring visual data from the hardware desgined for **iMarker Detection**. It is mainly used alongside [the detector software](https://github.com/snt-arg/csr_detector) and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks.
+This repository contains the interfaces for acquiring visual data from the hardware desgined for **iMarker Detection**. It is mainly used alongside [the detector algorithms](https://github.com/snt-arg/csr_detector) and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks.
 
 The current version of the code supports the vision sensors listed below, but it can extend to cover others in the future:
 
@@ -12,11 +12,11 @@ The current version of the code supports the vision sensors listed below, but it
 | [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ids-cam) | USB 3.0 and uEye+      | Sony Pregius IMX265 3MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                     |
 | [intel RealSense D435(i)](https://github.com/snt-arg/csr_sensors#rs-cam)     | USB 3.0 and RS library | RealSense Depth Camera D435 4MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                   |
 
-## ⚒️ Sensors Setup
+## ⚒️ Sensors Setup <a id="setup"></a>
 
 The hardware to detect iMarkers and CSRs are designed in two ways:
 
-- **A. Dual-vision Setup:** a homogeneous perception system containing two (synchronized) cameras fixed perpendicular to each other in a pack, facing two different surfaces of an optical component, _i.e.,_ a beamsplitte. Setups designed for [ELP](https://github.com/snt-arg/csr_sensors#usb-cam) and [iDS](https://github.com/snt-arg/csr_sensors#ids-cam) cameras are the designed solutions.
+- **A. Dual-vision Setup:** a homogeneous perception system containing two (synchronized) cameras fixed perpendicular to each other in a pack, facing two different surfaces of an optical component, _i.e.,_ a beamsplitter. Setups designed for [ELP](https://github.com/snt-arg/csr_sensors#usb-cam) and [iDS](https://github.com/snt-arg/csr_sensors#ids-cam) cameras are the designed solutions.
 - **B. Single-vision Setup:** a single camera with a polarizer (fixed or changable) attached to its lens. [RealSense](https://github.com/snt-arg/csr_sensors#rs-cam) is used for this purpose.
 
 ## ⚙️ Installation
@@ -61,6 +61,8 @@ For RealSense cameras, the required interface is **USB 3.0**. Install the librar
 
 ## 📑 Code Structure
 
+It should be noted that this repository contains the functions to use the introduced sensors in the `/sensors/` directory, described as below:
+
 - **A. ELP USB Camera:** in `sensorUSB.py`, you can find functions `createCameraObject` and `grabImage` for creating camera objects and grabbing the frames, respectively.
 - **B. iDS Camera:** in `sensorIDS.py`, you can find below functions:
   - `loadCameraParameters`: loading camera parameters from a yaml file
@@ -80,8 +82,6 @@ For RealSense cameras, the required interface is **USB 3.0**. Install the librar
   - `stopPipeline`: stopping the pipeline and releasing memory
 
 ## 🚀 Running the Code
-
-It should be noted that this repository contains the functions to use the introduced sensors in the `/sensors/` directory, described as below:
 
 As mentioned before, the current repository is a sub-module and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks. Accordingly, take a look at the mentioned repositories to see examples of using sensors.
 
