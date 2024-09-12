@@ -74,7 +74,7 @@ It should be noted that this repository contains the functions to use the introd
   - `getFrame`: triggering the camera to capture a frame and returns the frame as a numpy array
   - `getCalibrationConfig`: getting the calibration configuration for the camera
   - `closeLibrary`: closing the IDS peak library and releases associated resources
-- **C. RealSense Camera:** in `sensorIDS.py`, you can find below functions:
+- **C. RealSense Camera:** in `sensorRealSense.py`, you can find below functions:
   - `createPipeline`: creating a pipeline for the RealSense camera
   - `startPipeline`: starting the pipeline for the RealSense camera
   - `grabFrames`: grabbing frames from the RealSense camera
@@ -83,7 +83,7 @@ It should be noted that this repository contains the functions to use the introd
 
 ## 🚀 Running the Code
 
-As mentioned before, the current repository is a sub-module and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks. Accordingly, take a look at the mentioned repositories to see examples of using sensors.
+⚠️ As mentioned before, the current repository is a sub-module and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks. Accordingly, take a look at the mentioned repositories to see examples of using sensors.
 
 As an example, you can find a sample of running iDS cameras to fetch frames:
 
