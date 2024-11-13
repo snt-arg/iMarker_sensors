@@ -1,4 +1,3 @@
-import os
 import glob
 import yaml
 import cv2 as cv
@@ -144,12 +143,9 @@ def stereoCalibration(cameraType: str):
     cvFile.release()
 
 
-def getCalibrationParams(cameraType: str):
-    # Get the current path
-    currentPath = os.getcwd()
+def getCalibrationParams(filePath: str):
     # Read the calibration parameters
-    cvFile = cv.FileStorage(
-        f'{currentPath}/output/{cameraType}StereoMap.xml', cv.FILE_STORAGE_READ)
+    cvFile = cv.FileStorage(filePath, cv.FILE_STORAGE_READ)
     stereoMapL_x = cvFile.getNode('stereoMapL_x').mat()
     stereoMapL_y = cvFile.getNode('stereoMapL_y').mat()
     stereoMapR_x = cvFile.getNode('stereoMapR_x').mat()

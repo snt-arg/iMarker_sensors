@@ -1,3 +1,4 @@
+import os
 from utils import captureStereoImagesELP, stereoCalibration, getCalibrationParams
 
 
@@ -12,7 +13,10 @@ def main():
     print("Calibration completed!")
     # Step#3 - Show the calibration results
     print("Use getCalibrationParams('elp') to access the calibration parameters. Sample: ")
-    sample = getCalibrationParams('elp')
+    # Get the current path
+    currentPath = os.getcwd()
+    filePath = f'{currentPath}/output/elpStereoMap.xml'
+    sample = getCalibrationParams(filePath)
     # Convert to integer and show a few elements from one of the maps (e.g., stereoMapL_x)
     sample_int = sample[0].astype(int)
     print("Sample integers from stereoMapL_x:")
