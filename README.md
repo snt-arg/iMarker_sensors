@@ -81,6 +81,10 @@ It should be noted that this repository contains the functions to use the introd
   - `getColorFrame`: fetching color frames from the RealSense camera
   - `stopPipeline`: stopping the pipeline and releasing memory
 
+## Calibration
+
+You might need to calibrate the cameras, specially for the dual-vision sensors, if you are using the sensor for the first time. To do this, follow the instructions in the [calibration page](/src/csr_sensors/sensors/calibration/README.md).
+
 ## 🚀 Running the Code
 
 ⚠️ As mentioned before, the current repository is a sub-module and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks. Accordingly, take a look at the mentioned repositories to see examples of using sensors.
