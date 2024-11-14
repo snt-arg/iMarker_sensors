@@ -95,13 +95,17 @@ class rsCamera:
 
         Parameters
         ----------
-        frames: list
+        frames: numpy.ndarray
             Grabbed frame from the camera
 
-        Raises
-        ------
-        Exception
-            If an error occurs while getting a color frame.
+        Returns
+        -------
+        colorImage: numpy.ndarray
+            The color image from the camera
+        cameraMatrix: numpy.ndarray
+            The camera matrix of the color camera
+        distCoeffs: numpy.ndarray
+            The distortion coefficients of the color camera
         '''
         try:
             # Initializations
@@ -111,10 +115,22 @@ class rsCamera:
             # Get intrinsics of the color camera
             if colorFrame:
                 colorCamIntrinsics = colorFrame.profile.as_video_stream_profile().intrinsics
+                # Extract the intrinsic parameters
+                fx = colorCamIntrinsics.fx
+                fy = colorCamIntrinsics.fy
+                ppx = colorCamIntrinsics.ppx
+                ppy = colorCamIntrinsics.ppy
+                # Create the camera matrix
+                cameraMatrix = np.array([[fx, 0, ppx],
+                                        [0, fy, ppy],
+                                        [0,  0,   1]], dtype=np.float32)
+                # Create the distortion coefficients array
+                distCoeffs = np.array(
+                    colorCamIntrinsics.coeffs, dtype=np.float32)
             # Convert the color frame to a numpy array
             colorImage = np.asanyarray(colorFrame.get_data())
             # Return
-            return colorImage, colorCamIntrinsics
+            return colorImage, cameraMatrix, distCoeffs
         except Exception as exception:
             print(
                 f'- Error occurred while getting color frames!\n- {exception}', 'error')
