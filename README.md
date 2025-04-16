@@ -27,7 +27,7 @@ As different sensors come with different hardware/software interfaces, picking t
 
 For ELP cameras, the only required interface is **USB 2.0**, making the usage of the sensor as "plug & play." Thus, you only need to install OpenCV using the command `pip install opencv-python` (tested with `opencv-python>4.10`).
 
-### iDS Cameras <a id="ids-cam"></a>
+### iDS Cameras (Optional) <a id="ids-cam"></a>
 
 iDS cameras require **USB 3.0** and **iDS Peak** library and its Python binding introduced in [this link](https://en.ids-imaging.com/download-details/AB03448.html). Thus, you need to follow the steps described below:
 

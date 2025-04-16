@@ -11,8 +11,6 @@ if __name__ == '__main__':
           install_requires=[
               'numpy',
               'opencv-python',
-              'pyrealsense2',
-              'ids-peak',
-              'ids-peak-ipl'
+              'pyrealsense2'
           ],
           )
