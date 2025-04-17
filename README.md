@@ -21,12 +21,14 @@ The current version of the repository supports the cameras listed below. However
 | [iDS Cameras](https://github.com/snt-arg/csr_sensors#ids-cam)            | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
 | [intel RealSense Cameras](https://github.com/snt-arg/csr_sensors#rs-cam) | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
 
-## ⚒️ Sensors Setup <a id="setup"></a>
+### 🧰 How to Use Them to Detect iMarkers?
 
-The hardware to detect iMarkers and CSRs are designed in two ways:
+Various hardware designs can be employed to detect iMarkers (and differentiate their CSR-coated regions). In general, these sensors are designed in two variants:
 
-- **A. Dual-vision Setup:** a homogeneous perception system containing two (synchronized) cameras fixed perpendicular to each other in a pack, facing two different surfaces of an optical component, _i.e.,_ a beamsplitter. Setups designed for [ELP](https://github.com/snt-arg/csr_sensors#usb-cam) and [iDS](https://github.com/snt-arg/csr_sensors#ids-cam) cameras are the designed solutions.
-- **B. Single-vision Setup:** a single camera with a polarizer (fixed or changable) attached to its lens. [RealSense](https://github.com/snt-arg/csr_sensors#rs-cam) is used for this purpose.
+- **A. Dual-vision Sensor Setup:** a homogeneous perception system containing two (synchronized) cameras of the same type (_e.g.,_ two iDS cameras) fixed perpendicular to each other while facing different surfaces of an optical component, _i.e.,_ a beamsplitter.
+  - _example_: dual-vision setups designed for [ELP](https://github.com/snt-arg/iMarker_sensors#usb-cam) and [iDS](https://github.com/snt-arg/iMarker_sensors#ids-cam) cameras.
+- **B. Single-vision Sensor Setup:** a single camera with a polarizer (fixed or switching) attached to its lens.
+  - _example_: single-vision setup using [RealSense](https://github.com/snt-arg/iMarker_sensors#rs-cam).
 
 ## ⚙️ Installation
 
