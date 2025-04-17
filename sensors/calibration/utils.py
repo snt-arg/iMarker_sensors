@@ -1,39 +1,84 @@
+"""
+🛠️ Utility functions for calibration and config handling.
+"""
+
+import os
 import glob
 import yaml
 import cv2 as cv
 import numpy as np
 
 
-def readConfig():
+def readConfig(configPath='config.yaml'):
+    """
+    Loads YAML configuration file.
+
+    Parameters
+    ----------
+    configPath: str
+        Path to the config YAML file. Defaults to 'config.yaml' in current directory.
+
+    Returns
+    -------
+    dict
+        Dictionary containing configuration values.
+    """
     config = {}
+    if not os.path.exists(configPath):
+        raise FileNotFoundError(f"Config file not found at: {configPath}")
+
     # Read config YAML from file
-    with open('config.yaml') as file:
-        config = yaml.load(file, Loader=yaml.FullLoader)
+    with open(configPath, 'r') as file:
+        try:
+            config = yaml.load(file, Loader=yaml.FullLoader)
+        except yaml.YAMLError as exc:
+            raise ValueError(f"Error reading YAML file: {exc}")
+
     # Return the config
+    print(f"Loaded configuration from {configPath}")
     return config
 
 
-def captureStereoImagesELP():
+def captureStereoImages():
+    """
+    Captures images from dual-vision ELP cameras and saves them
+    when the user presses 's'. Press 'ESC' to exit the capture loop.
+
+    Configuration should be present in config.yaml under:
+    configs:
+      elp:
+        ports:
+          lCam: <int>
+          rCam: <int>
+      outputPath: <path>
+    """
     # Variables
     counter = 0
-    # Read configurations from the config file
+
+    # Load configurations
     config = readConfig()['configs']
+
     # Prepare a hint for the user
     print('- Press "s" to save the images and "ESC" to exit ...')
+
     # Capture the video stream
     capL = cv.VideoCapture(config['elp']['ports']['lCam'])
     capR = cv.VideoCapture(config['elp']['ports']['rCam'])
+
     # Loop to capture images
     while capL.isOpened() and capR.isOpened():
         # Read the frames
         succesL, imgL = capL.read()
         succesR, imgR = capR.read()
+
         # Need flip the image
         imgR = cv.flip(imgR, 1)
+
         # Check for any stoppage
         key = cv.waitKey(5)
         if key == 27:
             break
+
         # Run the code
         elif key == ord('s'):  # wait for 's' key to save and exit
             cv.imwrite(f'{config["outputPath"]}/imgL/image' +
@@ -41,12 +86,15 @@ def captureStereoImagesELP():
             cv.imwrite(f'{config["outputPath"]}/imgR/image' +
                        str(counter) + '.png', imgR)
             counter += 1
+
         # Show the images
         cv.imshow('Image Left', imgL)
         cv.imshow('Image Right', imgR)
+
     # Release and destroy all windows before termination
     capL.release()
     capR.release()
+
     # Stop
     cv.destroyAllWindows()
 
@@ -144,12 +192,40 @@ def stereoCalibration(cameraType: str):
 
 
 def getCalibrationParams(filePath: str):
-    # Read the calibration parameters
+    """
+    Loads stereo rectification maps from an OpenCV XML/YAML file.
+
+    Parameters
+    ----------
+    filePath : str
+        Path to the stereo calibration file (e.g., XML or YAML format).
+
+    Returns
+    -------
+    tuple of np.ndarray
+        stereoMapL_x, stereoMapL_y, stereoMapR_x, stereoMapR_y
+
+    Raises
+    ------
+    FileNotFoundError
+        If the file path does not exist or cannot be opened.
+    ValueError
+        If any of the stereo map nodes are missing or unreadable.
+    """
+    if not os.path.exists(filePath):
+        raise FileNotFoundError(f"Calibration file not found at: {filePath}")
+
+    # Read calibration parameters
     cvFile = cv.FileStorage(filePath, cv.FILE_STORAGE_READ)
+    if not cvFile.isOpened():
+        raise IOError(f"Failed to open calibration file: {filePath}")
+
+    # Read matrices
     stereoMapL_x = cvFile.getNode('stereoMapL_x').mat()
     stereoMapL_y = cvFile.getNode('stereoMapL_y').mat()
     stereoMapR_x = cvFile.getNode('stereoMapR_x').mat()
     stereoMapR_y = cvFile.getNode('stereoMapR_y').mat()
     cvFile.release()
+
     # Return the calibration parameters
     return stereoMapL_x, stereoMapL_y, stereoMapR_x, stereoMapR_y

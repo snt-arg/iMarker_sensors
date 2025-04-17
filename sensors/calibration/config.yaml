@@ -1,5 +1,5 @@
 configs:
-  outputPath: "/home/ali/Codes/csr_detector_standalone/src/csr_sensors/sensors/calibration/output/"
+  outputPath: "[path to your output directory]"
   calibration:
     chessboardDims: [8, 5] # If you have a 9x6 chessboard
     chessboardSquareSize: 48 # in mm

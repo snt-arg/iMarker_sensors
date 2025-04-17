@@ -1,11 +1,42 @@
-# Calibrating Dual-Vision Sensors
+# 📸 Calibrating Dual-Vision Sensors
 
-Here you can find information for calibrating the dual vision sensors.
+This guide explains how to calibrate dual-vision sensor setups.
 
-## ELP Cameras
+---
 
-1. Go to the path `[PATH]/csr_sensors/sensors/calibration/`
-2. Activate the virtual environment (if any) and run
-3. Check the configuration parameters in [config.yaml](/src/csr_sensors/sensors/calibration/config.yaml)
-4. Run the Python file `stereoCalibrateELP.py`
-5. Use the final `elpStereoMap.xml` file in your code!
+## ✅ Prerequisites
+
+- Python ≥ 3.8
+- Virtual environment (recommended)
+- Required packages: `numpy`, `opencv-python`, `pyyaml`
+
+---
+
+## 📍 ELP Stereo Camera Calibration
+
+1. **Navigate to the calibration folder**
+
+   ```bash
+   cd `[PATH]/imarker_sensors/sensors/calibration/`
+   ```
+
+2. **(Optional) Activate your virtual environment**
+
+   ```bash
+   source venv/bin/activate
+   ```
+
+3. **Check or edit configuration parameters**
+
+   See [config.yaml](/sensors/calibration/config.yaml)
+
+4. **Run the calibration script**
+
+   ```bash
+   python stereoCalibrateELP.py
+   ```
+
+5. **Calibration complete!**
+
+   You will get a file named `elpStereoMap.xml` ([sample](/sensors/calibration/output/elpStereoMap.xml)) in the `output/` directory.
+   Use this file to undistort and rectify stereo images in your applications.
