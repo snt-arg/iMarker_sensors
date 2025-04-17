@@ -2,15 +2,24 @@
 
 ![Sensors](docs/cameraSetups.png "Sensors")
 
-This repository contains the interfaces for acquiring visual data from the hardware desgined for **iMarker Detection**. It is mainly used alongside [the detector algorithms](https://github.com/snt-arg/csr_detector) and wrapped by [GUI-enabled standalone version](https://github.com/snt-arg/csr_detector_standalone) and [ROS-based version](https://github.com/snt-arg/csr_detector_ros) frameworks.
+Welcome to the **iMarker Detector Sensor Interfaces** repository 👁️📷!
+This module provides clean and modular `Python` interfaces for acquiring visual data from hardware setups specifically designed for iMarker Detection.
 
-The current version of the code supports the vision sensors listed below, but it can extend to cover others in the future:
+## 🧠 About iMarkers
 
-| Sensor                                                                       | Interface              | Description                                                                                                                                                                   |
-| ---------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [ELP-USB8MP02G-L75](https://github.com/snt-arg/csr_sensors#usb-cam)          | USB 2.0                | HD 8MP Camera UVC SONY IMX179 CMOS - [link](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-| [iDS U3-3271LE-C-HQ Rev.1.2](https://github.com/snt-arg/csr_sensors#ids-cam) | USB 3.0 and uEye+      | Sony Pregius IMX265 3MP - [link](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                                     |
-| [intel RealSense D435(i)](https://github.com/snt-arg/csr_sensors#rs-cam)     | USB 3.0 and RS library | RealSense Depth Camera D435 4MP - [link](https://www.intelrealsense.com/depth-camera-d435/)                                                                                   |
+**iMarkers** are invisible fiducial markers detectable only by certain sensors and algorithms. They enable robust detection for human-robot interaction, AR applications, and indoor localization.
+Read more about iMarkers (developed for the TRANSCEND project at the [University of Luxembourg](https://www.uni.lu/en/)) in [this link](https://snt-arg.github.io/iMarkers/).
+
+## 📸 Supported Visual Sensors
+
+The current version of the repository supports the cameras listed below. However, it can extend to cover more sensors in the future.
+
+| Camera                                                                   | Interface                | Tested with                                                                                                                                           |
+| ------------------------------------------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Plug&Play USB Cameras](https://github.com/snt-arg/csr_sensors#usb-cam)  | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+|                                                                          |                          | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
+| [iDS Cameras](https://github.com/snt-arg/csr_sensors#ids-cam)            | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
+| [intel RealSense Cameras](https://github.com/snt-arg/csr_sensors#rs-cam) | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
 
 ## ⚒️ Sensors Setup <a id="setup"></a>
 
@@ -130,3 +139,11 @@ def main():
 # Run the program
 main()
 ```
+
+## 📎 Related Repositories
+
+It is intended to work in conjunction with the core detection and visualization pipelines:
+
+- 🔍 [iMarker Detector Algorithms](https://github.com/snt-arg/iMarker_algorithms)
+- 🖥️ [Standalone GUI-enabled Version of iMarker Detection](https://github.com/snt-arg/iMarker_detector_standalone)
+- 🤖 [ROS-enabled Version of iMarker Detection for Advanced Robotics](https://github.com/snt-arg/iMarker_detector_ros)
