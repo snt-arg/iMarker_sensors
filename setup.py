@@ -15,6 +15,7 @@ if __name__ == '__main__':
             'numpy>=1.24.4',
             'opencv-python>=4.10.0.84',
             'pyrealsense2>=2.55.1.6486',
+            'pyyaml>=6.0.2'
         ],
         python_requires='>=3.8',
     )

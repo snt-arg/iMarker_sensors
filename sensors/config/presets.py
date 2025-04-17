@@ -1,10 +1,39 @@
+"""
+📐 Sensor Presets
+
+This module stores predefined intrinsic parameters (camera matrices and distortion
+coefficients) for different devices, as well as homography matrices for the dual-vision
+sensor setups.
+"""
+
+# ============================
+# 🎥 Intrinsic Parameters
+# ============================
+
 import numpy as np
 
-# Homography matrix for iDS cameras
-# Structure: [[scaling x-axis, skewing x-axis, shift x-axis]
-#             [skewing y-axis, scaling y-axis, shift y-axis]
-#             [perspective x-axis, perspective y-axis, scaling all]]
-homographyMatList = {
+# RealSense D435i
+cameraMatrix_RealSense = np.array(
+    [[605.8, 0.0, 325.0],
+        [0.0, 606.3, 244.8],
+        [0.0, 0.0, 1.0]])
+distCoeffs_RealSense = np.array([0.0, 0.0, 0.0, 0.0, 0.0])
+
+# iPhone 13
+cameraMatrix_iPhone13 = np.array(
+    [[2962.38, 0.0, 1980.12],
+        [0.0, 2969.24, 1520.88],
+        [0.0, 0.0, 1.0]])
+distCoeffs_iPhone13 = np.array([0.0, 0.0, 0.0, 0.0, 0.0])
+
+# =============================================
+# 🔁 Homography Matrices for dual-vision setups
+# =============================================
+
+# Format: [[scaling X, skew X, shift X]
+#         [skew Y, scaling Y, shift Y]
+#         [persp. X, persp. Y, scaling all]]
+dualVisionHomographyMatrices_iDS = {
     'Settings1': np.array([[1.01621457e+00,  3.58445420e-02, -2.44065632e+01],
                           [-9.84581954e-03,  1.02765380e+00, -1.40367861e+01],
                           [4.41648502e-06,  3.15020103e-05,  1.00000000e+00]]),
@@ -21,4 +50,4 @@ homographyMatList = {
                            [-2.04845601e-02,  1.00052354e+00, - 7.19983568e+00],
                            [-1.30236568e-06,  1.20892788e-06,  1.00000000e+00]])
 }
-homographyMat = homographyMatList['Settings5']
+homographyMatrixPreset_iDS = dualVisionHomographyMatrices_iDS['Settings5']
