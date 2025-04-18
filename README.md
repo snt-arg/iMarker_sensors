@@ -1,6 +1,6 @@
 # iMarker Detector Sensor Interfaces
 
-![Sensors](docs/cameraSetups.png "Sensors")
+![iMarker Detector Sensors](docs/banner.png "iMarker Detector Sensors")
 
 Welcome to the **iMarker Detector Sensor Interfaces** repository 👁️📷!
 This module provides clean and modular `Python` interfaces for acquiring visual data from hardware setups specifically designed for iMarker Detection.
@@ -149,6 +149,8 @@ while True:
   # Get the color frame
   frame, matrix, coeffs = rs.getColorFrame(frames)
 
+  # Other codes ...
+
 # Stop the pipeline and close the windows
 if isPipelineStarted:
     rs.stopPipeline()
@@ -162,44 +164,29 @@ from ids_peak import ids_peak
 from ids_peak_ipl import ids_peak_ipl
 from sensors import ids_interface as ids
 
-class idsCamera:
-    # class implementation...
+# Fetch the camera
+cap = ids.idsCamera(0)
 
-def main():
-    # Create the camera object
-    cap = idsCamera(0)
+# Get the calibration configuration
+cap.getCalibrationConfig('[path]', 'cam1')
 
-    # Load camera parameters (optional)
-    cap.loadCameraParameters("camera_parameters.cset")
+# Capture the frames
+cap.startAquisition()
 
-    # Set the region of interest (optional)
-    cap.setROI(0, 0, 640, 480)
+# Loop
+while True:
+  # Fetch the frames
+  frame = cap.getFrame()
 
-    # Synchronize the camera as master
-    cap.syncAsMaster()
+  # Other codes ...
 
-    # Start data acquisition
-    cap.startAquisition()
-
-    # Set exposure time (optional)
-    cap.setExposureTime(20000)
-
-    while True:
-        # Capture a frame
-        frame = cap.getFrame()
-
-        # Process the frame...
-
-    # Close the camera and release resources
-    cap.closeLibrary()
-
-# Run the program
-main()
+# Stop the pipeline and close the windows
+cap.closeLibrary()
 ```
 
-## Calibration
+## 💡 Calibration
 
-You might need to calibrate the cameras, specially for the dual-vision sensors, if you are using the sensor for the first time. To do this, follow the instructions in the [calibration page](/src/csr_sensors/sensors/calibration/README.md).
+You might need to calibrate the cameras, specially for the dual-vision sensors, if you are using the sensor for the first time. To do this, follow the instructions in the [calibration page](/sensors/calibration/README.md).
 
 ## 📎 Related Repositories
 
