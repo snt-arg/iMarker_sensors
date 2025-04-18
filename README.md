@@ -114,7 +114,7 @@ while True:
   # Retrieve frames
   ret, frame = usb.grabImage(cap)
 
-  # Get the parameters
+  # Get the parametersNot a member of this organization
   usb.getCameraParameters(cap)
 
   # Other codes ...
@@ -125,12 +125,42 @@ cap.release()
 
 ### II. Run a RealSense Camera
 
+```python
+from sensors import rs_interface
+
+# Fetch the camera
+rs = rs_interface.rsCamera((640, 480), 30)
+
+# Create a pipeline
+rs.createPipeline()
+
+# Start the pipeline
+isPipelineStarted = rs.startPipeline()
+
+# Loop
+while True:
+  # Check if the frames are valid
+  if not isPipelineStarted:
+      break
+
+  # Retrieve frames
+  frames = rs.grabFrames()
+
+  # Get the color frame
+  frame, matrix, coeffs = rs.getColorFrame(frames)
+
+# Stop the pipeline and close the windows
+if isPipelineStarted:
+    rs.stopPipeline()
+```
+
 ### III. Run an iDS Camera
 
 ```python
+import numpy as np
 from ids_peak import ids_peak
 from ids_peak_ipl import ids_peak_ipl
-import numpy as np
+from sensors import ids_interface as ids
 
 class idsCamera:
     # class implementation...
