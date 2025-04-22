@@ -14,12 +14,12 @@ Read more about iMarkers (developed for the TRANSCEND project at the [University
 
 The current version of the repository supports the cameras listed below. However, it can extend to cover more sensors in the future.
 
-| Camera                                                                   | Interface                | Tested with                                                                                                                                           |
-| ------------------------------------------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Plug&Play USB Cameras](https://github.com/snt-arg/csr_sensors#usb-cam)  | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-|                                                                          | USB 2.0                  | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
-| [iDS Cameras](https://github.com/snt-arg/csr_sensors#ids-cam)            | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
-| [intel RealSense Cameras](https://github.com/snt-arg/csr_sensors#rs-cam) | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
+| Camera                                                                    | Interface                | Tested with                                                                                                                                           |
+| ------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Plug & Play USB Cameras](https://github.com/snt-arg/csr_sensors#usb-cam) | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+|                                                                           | USB 2.0                  | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
+| [iDS Cameras](https://github.com/snt-arg/csr_sensors#ids-cam)             | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
+| [intel RealSense Cameras](https://github.com/snt-arg/csr_sensors#rs-cam)  | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
 
 ### 🧰 How to Use Them to Detect iMarkers?
 
@@ -36,7 +36,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/snt-arg/iMarker_sensors.git
-cd iMarker_sensors/sensors
+cd iMarker_sensors
 ```
 
 (Optional) Create and activate a virtual environment:
@@ -46,7 +46,7 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-Install the required libraries using the below command:
+Install the required libraries using the command below:
 
 ```bash
 pip install -r requirements.txt
@@ -55,7 +55,7 @@ pip install -r requirements.txt
 
 This will install all the required dependencies, but to know more about the libraries, check the bullet list below:
 
-#### I. Plug&Play USB Cameras <a id="usb-cam"></a>
+#### I. Plug & Play USB Cameras <a id="usb-cam"></a>
 
 Sensors like `ELP` or `MaxMax UV` cameras only require OpenCV (tested with `opencv-python>=4.10`).
 
@@ -95,13 +95,13 @@ If you want to use iDS cameras, you need to **register** in their website and **
 
 The current repository contains easy-to-use functions to fetch the frames from the introduced sensors in the [sensors](/sensors/) directory, described as below:
 
-- Functions to use **Plug&Play USB Cameras** are available in [usb_interface](/sensors/usb_interface.py) file.
+- Functions to use **Plug & Play USB Cameras** are available in [usb_interface](/sensors/usb_interface.py) file.
 - Functions to use **RealSense Cameras** are available in [rs_interface](/sensors/rs_interface.py) file.
 - Functions to use **iDS Cameras** are available in [ids_interface](/sensors/ids_interface.py) file.
 
 ## 🧪 Example Usage
 
-### I. Run a Plug&Play USB Camera
+### I. Run a Plug & Play USB Camera
 
 ```python
 from sensors import usb_interface as usb
@@ -114,7 +114,7 @@ while True:
   # Retrieve frames
   ret, frame = usb.grabImage(cap)
 
-  # Get the parametersNot a member of this organization
+  # Get the parameters
   usb.getCameraParameters(cap)
 
   # Other codes ...
