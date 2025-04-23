@@ -1,4 +1,14 @@
 """
+📝 'iMarker Detector Sensor Interfaces' Software
+    SPDX-FileCopyrightText: (2025) University of Luxembourg
+    © 2025 University of Luxembourg
+    Developed by: Ali TOURANI et al. at SnT / ARG.
+
+'iMarker Detector Sensor Interfaces' is licensed under the "SNT NON-COMMERCIAL" License.
+You may not use this file except in compliance with the License.
+
+-----------------------------------------------
+
 📝 USB Camera Interface Module
 
 This module provides a simple OpenCV-based interface for working with
