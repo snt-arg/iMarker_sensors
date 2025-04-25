@@ -14,12 +14,12 @@ Read more about iMarkers (developed for the TRANSCEND project at the [University
 
 The current version of the repository supports the cameras listed below. However, it can extend to cover more sensors in the future.
 
-| Camera                                                                    | Interface                | Tested with                                                                                                                                           |
-| ------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Plug & Play USB Cameras](https://github.com/snt-arg/csr_sensors#usb-cam) | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
-|                                                                           | USB 2.0                  | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
-| [iDS Cameras](https://github.com/snt-arg/csr_sensors#ids-cam)             | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
-| [intel RealSense Cameras](https://github.com/snt-arg/csr_sensors#rs-cam)  | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
+| Camera                                                                        | Interface                | Tested with                                                                                                                                           |
+| ----------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Plug & Play USB Cameras](https://github.com/snt-arg/iMarker_sensors#usb-cam) | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
+|                                                                               | USB 2.0                  | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
+| [iDS Cameras](https://github.com/snt-arg/iMarker_sensors#ids-cam)             | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
+| [intel RealSense Cameras](https://github.com/snt-arg/iMarker_sensors#rs-cam)  | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
 
 ### 🧰 How to Use Them to Detect iMarkers?
 
