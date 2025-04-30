@@ -18,6 +18,7 @@ The current version of the repository supports the cameras listed below. However
 | ----------------------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Plug & Play USB Cameras](https://github.com/snt-arg/iMarker_sensors#usb-cam) | USB 2.0                  | [ELP-USB8MP02G-L75](http://www.webcamerausb.com/elp-8mp-highdefinition-usb-camera-module-usb20-sony-imx179-color-cmos-sensor-75degree-lens-p-45.html) |
 |                                                                               | USB 2.0                  | [MaxMax UV Camera](https://maxmax.com/maincamerapage/uvcameras)                                                                                       |
+|                                                                               | USB 2.0                  | [MaxMax IR Camera](https://maxmax.com/maincamerapage/infrared-cameras)                                                                                |
 | [iDS Cameras](https://github.com/snt-arg/iMarker_sensors#ids-cam)             | USB 3.0 and `uEye+`      | [iDS U3-3271LE-C-HQ Rev.1.2](https://en.ids-imaging.com/store/u3-3271le-rev-1-2.html)                                                                 |
 | [intel RealSense Cameras](https://github.com/snt-arg/iMarker_sensors#rs-cam)  | USB 3.0 and `RS library` | [RealSense Depth Camera D435](https://www.intelrealsense.com/depth-camera-d435/)                                                                      |
 
@@ -57,7 +58,7 @@ This will install all the required dependencies, but to know more about the libr
 
 #### I. Plug & Play USB Cameras <a id="usb-cam"></a>
 
-Sensors like `ELP` or `MaxMax UV` cameras only require OpenCV (tested with `opencv-python>=4.10`).
+Sensors like `ELP` or `MaxMax UV/IR` cameras only require OpenCV (tested with `opencv-python>=4.10`).
 
 #### II. RealSense Cameras <a id="rs-cam"></a>
 
